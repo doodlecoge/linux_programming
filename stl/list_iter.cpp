@@ -4,9 +4,9 @@
 typedef struct
 {
     int value;
-} val;
+} TheType;
 
-typedef std::list<val>::iterator LI_t;
+typedef std::list<TheType>::iterator LI_t;
 
 void foo(LI_t& li)
 {
@@ -16,9 +16,9 @@ void foo(LI_t& li)
 
 int main(int argc, char* argv[])
 {
-    std::list<val> int_list;
+    std::list<TheType> int_list;
 
-    val a;
+    TheType a;
 
     a.value = 0;
     int_list.push_front(a);
@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
     a.value = 2;
     int_list.push_front(a);
 
-    std::list<val>::iterator iter = int_list.begin();
+    std::list<TheType>::iterator iter = int_list.begin();
     for(; iter != int_list.end(); iter++)
     {
         foo(iter);
