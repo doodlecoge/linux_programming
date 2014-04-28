@@ -1,0 +1,42 @@
+#include "c"
+
+
+manifest = [collect find . -name echo*.c -print];
+objs = [fromto %0%.c %0%.o [match_mask %0%.c [manifest]]];
+progs = [fromto %0%.o %0% [objs]];
+clean-targets = [fromto %0%.o %0%-clean [objs]];
+
+
+all: [progs] set default;
+clean: [clean-targets];
+
+%0%: %0%.o
+{
+    [print [target]];
+    cc %0%.o -o [target];
+}
+
+%0%.o: %0%.c
+    [collect c_incl -api %0%.c]
+{
+    cc -c %0%.c -o [target];
+}
+
+%0%-clean: 
+{
+    rm -rf %0%;
+}
+
+/*
+    cook has only one type of variable that is a list of
+    string literals.
+*/
+ARR = "1 2 3";
+N = and;
+ARR += [N] 4   '5           6';
+
+loop i = [ARR]
+{
+    [print [i]];
+}
+
