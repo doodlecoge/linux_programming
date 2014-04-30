@@ -1,0 +1,35 @@
+/**/
+function show_examples =
+{
+    [data_type_examples];
+    [shell_examples];
+}
+
+/*
+ * cook has only one type of variable that is
+ * a list of string literals.
+ */
+function data_type_examples =
+{
+    N = and;
+    ARR = "1 2   3";
+    ARR += [N] 4   '5, 6';
+
+    Cnt = '';
+    loop item = [ARR]
+    {
+        [print "element" [count [Cnt]] "> " [item]];
+        Cnt += '';
+    }
+
+    [print "ARR size: " [count [ARR]]];
+    [print "first element: " [word 1 [ARR]]];
+    [print "second to last elements: " [wordlist 2 [count [ARR]] [ARR]]];
+    [print "and pos in ARR: " [in and [ARR]]];
+    [print "******************************************************"];
+}
+
+function shell_examples =
+{
+    pwd;
+}

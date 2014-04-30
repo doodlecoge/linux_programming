@@ -1,5 +1,8 @@
 #include "c"
+#include "functions"
 
+/* show file name and line number to output */
+set tell-position;
 
 manifest = [collect find . -name echo*.c -print];
 objs = [fromto %0%.c %0%.o [match_mask %0%.c [manifest]]];
@@ -10,9 +13,9 @@ clean-targets = [fromto %0%.o %0%-clean [objs]];
 all: [progs] set default;
 clean: [clean-targets];
 
+
 %0%: %0%.o
 {
-    [print [target]];
     cc %0%.o -o [target];
 }
 
@@ -25,18 +28,15 @@ clean: [clean-targets];
 %0%-clean: 
 {
     rm -rf %0%;
+    rm -rf %0%.o;
 }
 
-/*
-    cook has only one type of variable that is a list of
-    string literals.
-*/
-ARR = "1 2 3";
-N = and;
-ARR += [N] 4   '5           6';
-
-loop i = [ARR]
+examples:
 {
-    [print [i]];
+    [show_examples];
 }
+
+#include "examples.cook"
+
+
 
